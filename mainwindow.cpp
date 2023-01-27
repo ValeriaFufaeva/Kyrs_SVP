@@ -27,12 +27,16 @@ double
     robinson_male_imt,
     robinson_woman_imt;
 
+// Задаем валидатором невозможность ввода букв и символов, вводятся только цифры
+
 void MainWindow::on_lineEdit_cursorPositionChanged(int arg1, int arg2)
 {
     QRegularExpression rx ("[1-9][0-9][0-9]");
     QValidator *validator = new QRegularExpressionValidator(rx, this);
     ui->lineEdit->setValidator(validator);
 }
+
+// Ввод значений роста
 
 void MainWindow::DATA_INPUT()
 {
@@ -41,6 +45,7 @@ void MainWindow::DATA_INPUT()
     woman_height = S1.toInt();
 }
 
+// Расчет ИМТ по методу Брока
 
 void MainWindow::BROCK_IMT()
 {
@@ -57,6 +62,8 @@ void MainWindow::BROCK_IMT()
             ui->lineEdit_2->setText(QString::number(woman_imt));
     }
 }
+
+// Расчет ИМТ по методу Девайна
 
 void MainWindow::DEVIN_IMT()
 {
@@ -76,6 +83,8 @@ void MainWindow::DEVIN_IMT()
     }
 }
 
+// Расчет ИМТ по методу Робинсона
+
 void MainWindow::ROBINSON_IMT()
 {
     DATA_INPUT();
@@ -93,6 +102,8 @@ void MainWindow::ROBINSON_IMT()
 
     }
 }
+
+// Среднее арифметическое значение всех методов
 
 void MainWindow::AVERAGE_IMT()
 {
@@ -116,6 +127,9 @@ void MainWindow::AVERAGE_IMT()
     ui->lineEdit_2->setText(QString::number(average));
 }
 
+
+// Смена методов в выпадающем списке
+
 void MainWindow::on_pushButton_clicked()
 {
     if (ui->comboBox->currentIndex() == 0) {
@@ -131,6 +145,8 @@ void MainWindow::on_pushButton_clicked()
         ROBINSON_IMT();
     }
 }
+
+// Расчет среднего арифметического
 
 void MainWindow::on_pushButton_2_clicked()
 {
